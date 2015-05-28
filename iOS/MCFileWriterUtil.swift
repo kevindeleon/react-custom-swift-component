@@ -33,7 +33,6 @@ class MCFileWriterUtil: NSObject {
     var documentsDirectory: AnyObject = paths[0]
     
     // Create a string that prepends the documents directory path to a text file name
-    // using NSString's stringWithFormat method.
     var fileName = "\(documentsDirectory)/\(fileName)"
     NSLog("Writing to \(fileName)")
     
@@ -90,9 +89,7 @@ class MCFileWriterUtil: NSObject {
     var documentsDirectory: AnyObject = paths[0]
     
     // Create a string that prepends the documents directory path to a text file name
-    // using NSString's stringWithFormat method.
     var fileName = "\(documentsDirectory)/\(fileName)"
-    NSLog("Writing to \(fileName)")
     
     // Initialize an optional NSError variable
     var readError: NSError?
@@ -100,6 +97,7 @@ class MCFileWriterUtil: NSObject {
     // Allocate a string and initialize it with the contents of the file via
     // the contentsOfFile convenience init.
     var fileContents = NSString(contentsOfFile: fileName, encoding: NSUTF8StringEncoding, error: &readError)
+    NSLog("Reading from \(fileName)")
     
     // Error Condition handling
     if ((readError) != nil) {
