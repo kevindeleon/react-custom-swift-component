@@ -21,8 +21,8 @@ class MCFileWriterUtil: NSObject {
     // String doesn't have a length method in Swift, so we use count here instead.
     if (count(fileName) < 1) {
       // Craft a failure message
-      var resultsDict = [
-        "success": true,
+      let resultsDict = [
+        "success": false,
         "errMsg": "No file name"
       ]
       
@@ -33,13 +33,13 @@ class MCFileWriterUtil: NSObject {
     }
     
     // Create an array of directory Paths, to allow us to get the documents directory
-    var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
     
     // The documents directory is the first item - Swift complains here if we don't specify AnyObject as the type.
-    var documentsDirectory: AnyObject = paths[0]
+    let documentsDirectory: AnyObject = paths[0]
     
     // Create a string that prepends the documents directory path to a text file name
-    var fileName = "\(documentsDirectory)/\(fileName)"
+    let fileName = "\(documentsDirectory)/\(fileName)"
     NSLog("Writing to \(fileName)")
     
     // Initialize an NSError variable
@@ -52,7 +52,7 @@ class MCFileWriterUtil: NSObject {
     // Error Condition handling
     if ((writeError) != nil) {
       // Craft a failure message
-      var resultsDict = [
+      let resultsDict = [
         "success" : false,
         "errMsg"  : writeError!.localizedDescription
       ];
@@ -64,7 +64,7 @@ class MCFileWriterUtil: NSObject {
     else {
       
       // Craft a success return message
-      var resultsDict = [
+      let resultsDict = [
         "success" : true
       ];
       
@@ -78,8 +78,8 @@ class MCFileWriterUtil: NSObject {
     // String doesn't have a length method in Swift, so we use count here instead.
     if (count(fileName) < 1) {
       // Craft a failure message
-      var resultDict = [
-        "success": true,
+      let resultDict = [
+        "success": false,
         "errMsg": "No file name"
       ]
       
@@ -90,26 +90,26 @@ class MCFileWriterUtil: NSObject {
     }
     
     // Create an array of directory Paths, to allow us to get the documents directory
-    var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
     
     // The documents directory is the first item
-    var documentsDirectory: AnyObject = paths[0]
+    let documentsDirectory: AnyObject = paths[0]
     
     // Create a string that prepends the documents directory path to a text file name
-    var fileName = "\(documentsDirectory)/\(fileName)"
+    let fileName = "\(documentsDirectory)/\(fileName)"
     
     // Initialize an optional NSError variable
     var readError: NSError?
     
     // Allocate a string and initialize it with the contents of the file via
     // the contentsOfFile convenience init.
-    var fileContents = NSString(contentsOfFile: fileName, encoding: NSUTF8StringEncoding, error: &readError)
+    let fileContents = NSString(contentsOfFile: fileName, encoding: NSUTF8StringEncoding, error: &readError)
     NSLog("Reading from \(fileName)")
     
     // Error Condition handling
     if ((readError) != nil) {
       // Craft a failure message
-      var resultsDict = [
+      let resultsDict = [
         "success" : false,
         "errMsg"  : readError!.localizedDescription
       ];
@@ -120,7 +120,7 @@ class MCFileWriterUtil: NSObject {
     // Success handling
     else {
       // Craft a success return message
-      var resultsDict = [
+      let resultsDict = [
         "success"  : true,
         "contents" : fileContents!
       ];
