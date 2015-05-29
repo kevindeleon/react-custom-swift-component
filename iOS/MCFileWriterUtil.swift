@@ -49,7 +49,7 @@ class MCFileWriterUtil: NSObject {
     contents.writeToFile(fileNameWithPath, atomically: false, encoding: NSUTF8StringEncoding, error: &writeError)
     
     // Error Condition handling
-    if ((writeError) != nil) {
+    if (writeError) != nil {
       // Craft a failure message
       let resultsDict = [
         "success" : false,
@@ -106,7 +106,7 @@ class MCFileWriterUtil: NSObject {
     NSLog("Reading from \(fileNameWithPath)")
     
     // Error Condition handling
-    if ((readError) != nil) {
+    if (readError) != nil {
       // Craft a failure message
       let resultsDict = [
         "success" : false,
