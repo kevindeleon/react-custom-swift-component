@@ -2,9 +2,14 @@
 //  MCFileWriterUtil.swift
 //  CustomSwiftComponent
 //
+//  Original MCFileWriterUtil written in Objective C by Jay Garcia
+//  http://moduscreate.com/react_native_custom_components_ios/
+//
 //  Created by Kevin deLeon on 5/28/15.
 //  Copyright (c) 2015 Facebook. All rights reserved.
 //
+
+// This line was not in the documentation provided at https://facebook.github.io/react-native/docs/nativemodulesios.html#content but is neccessary.
 
 import Foundation
 
@@ -13,6 +18,7 @@ class MCFileWriterUtil: NSObject {
   
   @objc func writeFile(fileName: String, withContents contents: String, errorCallback failureCallback: RCTResponseSenderBlock, callback successCallback: RCTResponseSenderBlock) -> Void {
     
+    // String doesn't have a length method in Swift, so we use count here instead.
     if (count(fileName) < 1) {
       // Craft a failure message
       var resultsDict = [
@@ -29,7 +35,7 @@ class MCFileWriterUtil: NSObject {
     // Create an array of directory Paths, to allow us to get the documents directory
     var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
     
-    // The documents directory is the first item
+    // The documents directory is the first item - Swift complains here if we don't specify AnyObject as the type.
     var documentsDirectory: AnyObject = paths[0]
     
     // Create a string that prepends the documents directory path to a text file name
@@ -54,7 +60,7 @@ class MCFileWriterUtil: NSObject {
       // Execute the JavaScript failure callback handler
       failureCallback([resultsDict]);
     }
-      // Success handling
+    // Success handling
     else {
       
       // Craft a success return message
@@ -69,6 +75,7 @@ class MCFileWriterUtil: NSObject {
   
   @objc func readFile(fileName: String, errorCallback failureCallback: RCTResponseSenderBlock, callback successCallback: RCTResponseSenderBlock) -> Void {
     
+    // String doesn't have a length method in Swift, so we use count here instead.
     if (count(fileName) < 1) {
       // Craft a failure message
       var resultDict = [
@@ -110,7 +117,7 @@ class MCFileWriterUtil: NSObject {
       // Execute the JavaScript failure callback handler
       failureCallback([resultsDict]);
     }
-      // Success handling
+    // Success handling
     else {
       // Craft a success return message
       var resultsDict = [

@@ -1,5 +1,4 @@
-//
-//  Use this file to import your target's public headers that you would like to expose to Swift.
-//
+// This file seems to be neccessary for the module export to work.
+// It's created when we create a Cocoa Touch Class file via the File>New File Menu
 
 #import "RCTBridgeModule.h"
