@@ -21,9 +21,7 @@ var CustomSwiftComponent = React.createClass({
     getInitialState : function() {
         return {
             // textInput seemed like it should have an initial state, so I moved it here.
-            // I also changed this to an empty string by default because the Swift function expects
-            // an argument of type String and it was bombing otherwise.
-            textInputValue : '',
+            textInputValue : null,
             resultsText : 'Nothing has happened yet :('
         }
     },

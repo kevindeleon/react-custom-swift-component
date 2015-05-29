@@ -10,20 +10,19 @@
 //
 
 // This line was not in the documentation provided at https://facebook.github.io/react-native/docs/nativemodulesios.html#content but is neccessary.
-
 import Foundation
 
 @objc(MCFileWriterUtil)
 class MCFileWriterUtil: NSObject {
   
-  @objc func writeFile(fileName: String, withContents contents: String, errorCallback failureCallback: RCTResponseSenderBlock, callback successCallback: RCTResponseSenderBlock) -> Void {
+  @objc func writeFile(fileName: String?, withContents contents: String, errorCallback failureCallback: RCTResponseSenderBlock, callback successCallback: RCTResponseSenderBlock) -> Void {
     
-    // String doesn't have a length method in Swift, so we use count here instead.
-    if (count(fileName) < 1) {
+    // Check if fileName is nil or empty
+    if (fileName ?? "").isEmpty {
       // Craft a failure message
       let resultsDict = [
         "success": false,
-        "errMsg": "No file name"
+        "errMsg": "Filename is empty"
       ]
       
       // Execute the JavaScript failure callback handler
@@ -39,15 +38,15 @@ class MCFileWriterUtil: NSObject {
     let documentsDirectory: AnyObject = paths[0]
     
     // Create a string that prepends the documents directory path to a text file name
-    let fileName = "\(documentsDirectory)/\(fileName)"
-    NSLog("Writing to \(fileName)")
+    let fileNameWithPath = "\(documentsDirectory)/\(fileName!)"
+    NSLog("Writing to \(fileNameWithPath)")
     
     // Initialize an NSError variable
     var writeError: NSError?
     
     // Here we save contents to disk by executing the writeToFile method of
     // the contents String, which is the second argument to this function.
-    contents.writeToFile(fileName, atomically: false, encoding: NSUTF8StringEncoding, error: &writeError)
+    contents.writeToFile(fileNameWithPath, atomically: false, encoding: NSUTF8StringEncoding, error: &writeError)
     
     // Error Condition handling
     if ((writeError) != nil) {
@@ -73,18 +72,18 @@ class MCFileWriterUtil: NSObject {
     }
   }
   
-  @objc func readFile(fileName: String, errorCallback failureCallback: RCTResponseSenderBlock, callback successCallback: RCTResponseSenderBlock) -> Void {
+  @objc func readFile(fileName: String?, errorCallback failureCallback: RCTResponseSenderBlock, callback successCallback: RCTResponseSenderBlock) -> Void {
     
-    // String doesn't have a length method in Swift, so we use count here instead.
-    if (count(fileName) < 1) {
+    // Check if fileName is nil or empty
+    if (fileName ?? "").isEmpty {
       // Craft a failure message
-      let resultDict = [
+      let resultsDict = [
         "success": false,
-        "errMsg": "No file name"
+        "errMsg": "Filename is empty"
       ]
       
       // Execute the JavaScript failure callback handler
-      failureCallback([resultDict])
+      failureCallback([resultsDict])
       
       return; // Halt execution of this function
     }
@@ -96,15 +95,15 @@ class MCFileWriterUtil: NSObject {
     let documentsDirectory: AnyObject = paths[0]
     
     // Create a string that prepends the documents directory path to a text file name
-    let fileName = "\(documentsDirectory)/\(fileName)"
+    let fileNameWithPath = "\(documentsDirectory)/\(fileName!)"
     
     // Initialize an optional NSError variable
     var readError: NSError?
     
     // Allocate a string and initialize it with the contents of the file via
     // the contentsOfFile convenience init.
-    let fileContents = NSString(contentsOfFile: fileName, encoding: NSUTF8StringEncoding, error: &readError)
-    NSLog("Reading from \(fileName)")
+    let fileContents = NSString(contentsOfFile: fileNameWithPath, encoding: NSUTF8StringEncoding, error: &readError)
+    NSLog("Reading from \(fileNameWithPath)")
     
     // Error Condition handling
     if ((readError) != nil) {
