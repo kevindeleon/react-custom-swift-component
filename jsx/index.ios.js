@@ -16,18 +16,21 @@ var {
 } = require('NativeModules');
  
 var CustomSwiftComponent = React.createClass({
-    textInputValue : null,
     
     // Generate the initial state of the view.
     getInitialState : function() {
         return {
+            // textInput seemed like it should have an initial state, so I moved it here.
+            // I also changed this to an empty string by default because the Swift function expects
+            // an argument of type String and it was bombing otherwise.
+            textInputValue : '',
             resultsText : 'Nothing has happened yet :('
         }
     },
  
     // Executed when the TouchableHighlight "Save" button is pressed
     onSavePress : function() {
-        var fileName     = this.textInputValue,      // What file name to write?
+        var fileName     = this.state.textInputValue,      // What file name to write?
             fileContents = Math.random().toString(); // This goes into the file
  
         MCFileWriterUtil.writeFile(
@@ -52,7 +55,7 @@ var CustomSwiftComponent = React.createClass({
     // Executed when the TouchableHighlight "Load" button is pressed
     onLoadPress : function() {
         // File name from text input
-        var fileName = this.textInputValue; 
+        var fileName = this.state.textInputValue; 
         
         MCFileWriterUtil.readFile(
             fileName,                     
@@ -73,14 +76,16 @@ var CustomSwiftComponent = React.createClass({
  
     },
     
-    // Handler for the TextInput onChange event
+    // Handler for the TextInput onChange event -- changed a bit to setState
     onTextInputChange : function(event) {
-        this.textInputValue = event.nativeEvent.text;
+        this.setState({
+            textInputValue : event.nativeEvent.text
+        });
     },
  
     render: function() {
-        var state = this.state;
- 
+        // I didn't really see a point in definiing a var to hold this.state so I removed it
+
         return (
             <View style={styles.container}>
  
@@ -129,7 +134,7 @@ var CustomSwiftComponent = React.createClass({
                 {/*  Container for an output view */}
                 <View style={styles.outputContainer}>
                     <Text style={styles.outputText} ref="outputContainer">
-                        {state.resultsText}
+                        {this.state.resultsText}
                     </Text>
                 </View>
  
