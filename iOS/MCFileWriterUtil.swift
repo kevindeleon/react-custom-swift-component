@@ -10,6 +10,7 @@
 //
 
 // This line was not in the documentation provided at https://facebook.github.io/react-native/docs/nativemodulesios.html#content but is neccessary.
+
 import Foundation
 
 @objc(MCFileWriterUtil)
