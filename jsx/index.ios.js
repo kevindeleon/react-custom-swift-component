@@ -20,7 +20,7 @@ var CustomSwiftComponent = React.createClass({
     // Generate the initial state of the view.
     getInitialState : function() {
         return {
-            // textInput seemed like it should have an initial state, so I moved it here.
+            // textInput seemed like it should have an initial state, so I moved it here. -- KD
             textInputValue : null,
             resultsText : 'Nothing has happened yet :('
         }
@@ -82,7 +82,7 @@ var CustomSwiftComponent = React.createClass({
     },
  
     render: function() {
-        // I didn't really see a point in definiing a var to hold this.state so I removed it
+        // I didn't really see a point in definiing a var to hold this.state so I removed it -- KD
 
         return (
             <View style={styles.container}>
