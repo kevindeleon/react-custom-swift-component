@@ -9,7 +9,7 @@
 //  Copyright (c) 2015 Facebook. All rights reserved.
 //
 
-// This line was not in the documentation provided at https://facebook.github.io/react-native/docs/nativemodulesios.html#content but is neccessary.
+// Importing Foundation was not in the documentation provided at https://facebook.github.io/react-native/docs/nativemodulesios.html#content but is neccessary. That's likely something I took for granted not knowing Swift.
 
 import Foundation
 
